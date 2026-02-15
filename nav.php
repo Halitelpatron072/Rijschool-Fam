@@ -1,6 +1,5 @@
     <div class="topbar">
         <div class="topbar-container">
-            <a href="/login.php">Login</a>
 
             <div class="socials">
                 <a href="https://www.facebook.com/share/1CH3HLPNkV/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>
@@ -36,6 +35,7 @@
                 <a href="#">Actie</a>
                 <a href="#">Reviews</a>
                 <a href="#">Contact</a>
+                <a href="/login.php" class="login-btn">Login</a>
             </nav>
 
             <a href="https://wa.me/31684104098" class="whatsapp">

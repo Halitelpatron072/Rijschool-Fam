@@ -1,3 +1,4 @@
+
 <?php
 $pdo = require "config.php"; ?>
 

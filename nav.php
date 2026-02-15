@@ -1,5 +1,6 @@
     <div class="topbar">
         <div class="topbar-container">
+            <a href="/login.php">Login</a>
 
             <div class="socials">
                 <a href="https://www.facebook.com/share/1CH3HLPNkV/?mibextid=wwXIfr"><i class="fab fa-facebook-f"></i></a>

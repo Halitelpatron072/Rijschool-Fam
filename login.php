@@ -44,13 +44,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Login</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <main style="max-width: 420px; margin: 40px auto; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;">
+    <div class="form-container">
         <h1>Login</h1>
 
         <?php if ($error): ?>
-            <p style="color:#b00020;"><?php echo htmlspecialchars(
+            <p class="error"><?php echo htmlspecialchars(
                 $error,
                 ENT_QUOTES,
                 "UTF-8",
@@ -58,8 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <?php endif; ?>
 
         <form method="post" action="/login.php" autocomplete="on">
-            <div style="margin-bottom: 12px;">
-                <label for="email">E-mail</label><br />
+            <div class="form-group">
+                <label for="email">E-mail</label>
                 <input
                     id="email"
                     name="email"
@@ -71,30 +72,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         ENT_QUOTES,
                         "UTF-8",
                     ); ?>"
-                    style="width: 100%; padding: 8px;"
                 />
             </div>
 
-            <div style="margin-bottom: 12px;">
-                <label for="password">Wachtwoord</label><br />
+            <div class="form-group">
+                <label for="password">Wachtwoord</label>
                 <input
                     id="password"
                     name="password"
                     type="password"
                     required
                     autocomplete="current-password"
-                    style="width: 100%; padding: 8px;"
                 />
             </div>
 
-            <button type="submit" style="padding: 10px 14px;">Inloggen</button>
+            <button type="submit" class="btn">Inloggen</button>
         </form>
 
-        <p style="margin-top: 16px;">
+        <p class="form-footer">
             <a href="/index.php">Terug naar home</a>
             |
             <a href="/register.php">Registreren</a>
         </p>
-    </main>
+    </div>
 </body>
 </html>

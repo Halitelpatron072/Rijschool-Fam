@@ -8,7 +8,6 @@ require __DIR__ . "/auth.php";
 $pdo = require __DIR__ . "/config.php";
 
 $error = null;
-$success = null;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $name = trim((string) ($_POST["name"] ?? ""));
@@ -66,53 +65,56 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registreren</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Registreren</h1>
+    <div class="form-container">
+        <h1>Registreren</h1>
 
-    <?php if ($error): ?>
-        <p style="color: red;"><?php echo htmlspecialchars(
-            $error,
-            ENT_QUOTES,
-            "UTF-8",
-        ); ?></p>
-    <?php endif; ?>
+        <?php if ($error): ?>
+            <p class="error"><?php echo htmlspecialchars(
+                $error,
+                ENT_QUOTES,
+                "UTF-8",
+            ); ?></p>
+        <?php endif; ?>
 
-    <?php if ($success): ?>
-        <p style="color: green;"><?php echo htmlspecialchars(
-            $success,
-            ENT_QUOTES,
-            "UTF-8",
-        ); ?></p>
-    <?php endif; ?>
+        <form method="POST" autocomplete="off">
+            <div class="form-group">
+                <label for="name">Naam</label>
+                <input type="text" id="name" name="name" value="<?php echo htmlspecialchars(
+                    (string) ($_POST["name"] ?? ""),
+                    ENT_QUOTES,
+                    "UTF-8",
+                ); ?>" required />
+            </div>
 
-    <form method="POST" autocomplete="off">
-        <label for="name">Naam:</label><br />
-        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars(
-            (string) ($_POST["name"] ?? ""),
-            ENT_QUOTES,
-            "UTF-8",
-        ); ?>" required /><br /><br />
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" value="<?php echo htmlspecialchars(
+                    (string) ($_POST["email"] ?? ""),
+                    ENT_QUOTES,
+                    "UTF-8",
+                ); ?>" required />
+            </div>
 
-        <label for="email">E-mail:</label><br />
-        <input type="email" id="email" name="email" value="<?php echo htmlspecialchars(
-            (string) ($_POST["email"] ?? ""),
-            ENT_QUOTES,
-            "UTF-8",
-        ); ?>" required /><br /><br />
+            <div class="form-group">
+                <label for="password">Wachtwoord</label>
+                <input type="password" id="password" name="password" required />
+            </div>
 
-        <label for="password">Wachtwoord:</label><br />
-        <input type="password" id="password" name="password" required /><br /><br />
+            <div class="form-group">
+                <label for="password_confirm">Herhaal wachtwoord</label>
+                <input type="password" id="password_confirm" name="password_confirm" required />
+            </div>
 
-        <label for="password_confirm">Herhaal wachtwoord:</label><br />
-        <input type="password" id="password_confirm" name="password_confirm" required /><br /><br />
+            <button type="submit" class="btn">Account aanmaken</button>
+        </form>
 
-        <button type="submit">Account aanmaken</button>
-    </form>
-
-    <p>
-        Heb je al een account?
-        <a href="/login.php">Log in</a>
-    </p>
+        <p class="form-footer">
+            Heb je al een account?
+            <a href="/login.php">Log in</a>
+        </p>
+    </div>
 </body>
 </html>

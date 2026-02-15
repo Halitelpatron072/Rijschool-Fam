@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+    mysql:
+        image: mysql:8.0
+        container_name: mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: mydb
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+            - ./init:/docker-entrypoint-initdb.d
+
+    php:
+        image: php:8.2-apache
+        container_name: php
+        ports:
+            - "8000:80"
+        volumes:
+            - ./:/var/www/html
+        depends_on:
+            - mysql
+        command: >
+            bash -c "docker-php-ext-install mysqli pdo pdo_mysql && apache2-foreground"
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        container_name: phpmyadmin
+        environment:
+            PMA_HOST: mysql
+        ports:
+            - "8080:80"
+        depends_on:
+            - mysql
+
+volumes:
+    mysql_data:

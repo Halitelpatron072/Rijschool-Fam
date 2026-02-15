@@ -1,3 +1,6 @@
+<?php
+$pdo = require "config.php"; ?>
+
 <!DOCTYPE html>
 <html lang="nl">
 

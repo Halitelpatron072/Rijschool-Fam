@@ -49,7 +49,8 @@ $users = $stmt->fetchAll();
 
     <hr />
 
-    <section>
+    <?php if ($user["role"] == "instructor"): ?>
+        <section>
         <h2>Users</h2>
 
         <?php if (!$users): ?>
@@ -99,5 +100,6 @@ $users = $stmt->fetchAll();
             </table>
         <?php endif; ?>
     </section>
+    <?php endif; ?>
 </body>
 </html>

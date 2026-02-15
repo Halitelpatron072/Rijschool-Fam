@@ -30,7 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } elseif ($password !== $passwordConfirm) {
         $error = "Wachtwoorden komen niet overeen.";
     } else {
-        // Ensure email is unique (friendly error instead of SQL exception message)
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? LIMIT 1");
         $stmt->execute([$email]);
         $existing = $stmt->fetch();
@@ -40,19 +39,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } else {
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-            // If you have a default role in DB, you can omit it here.
-            // Otherwise set one explicitly.
-            $role = "student";
-
             $insert = $pdo->prepare('
                 INSERT INTO users (role, name, email, password_hash)
                 VALUES (?, ?, ?, ?)
             ');
-            $insert->execute([$role, $name, $email, $passwordHash]);
+            $insert->execute(["student", $name, $email, $passwordHash]);
 
             $userId = (int) $pdo->lastInsertId();
 
-            // Log the user in immediately after registration
             login_user([
                 "id" => $userId,
                 "role" => $role,
